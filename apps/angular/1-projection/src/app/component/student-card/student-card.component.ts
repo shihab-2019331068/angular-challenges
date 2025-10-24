@@ -21,7 +21,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       [list]="students()"
       class="bg-light-green"
       [itemTemplate]="itemTemplate"
-      (onAddNewItem)="addNewItem()">
+      (uponAddNewItem)="addNewItem()">
       <img ngSrc="assets/img/student.webp" width="200" height="200" />
     </app-card>
 
@@ -29,8 +29,7 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
       <app-list-item
         [name]="item.firstName"
         [id]="item.id"
-        [type]="cardType"
-        (onDeleteItem)="deleteStudent(item.id)"></app-list-item>
+        (uponDeleteItem)="deleteStudent(item.id)"></app-list-item>
     </ng-template>
   `,
   styles: [

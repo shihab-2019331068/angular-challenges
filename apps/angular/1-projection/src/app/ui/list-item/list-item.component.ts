@@ -4,13 +4,13 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CardType } from '../../model/card.model';
 
 @Component({
   selector: 'app-list-item',
   template: `
     <div class="border-grey-300 flex justify-between border px-2 py-1">
       {{ name() }}
+
       <button (click)="delete(id())">
         <img class="h-5" src="assets/svg/trash.svg" />
       </button>
@@ -19,13 +19,12 @@ import { CardType } from '../../model/card.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListItemComponent {
-  readonly id = input.required<number>();
   readonly name = input.required<string>();
-  readonly type = input.required<CardType>();
+  readonly id = input.required<number>();
 
-  readonly onDeleteItem = output<number>();
+  uponDeleteItem = output<number>();
 
   delete(id: number) {
-    this.onDeleteItem.emit(id);
+    this.uponDeleteItem.emit(id);
   }
 }

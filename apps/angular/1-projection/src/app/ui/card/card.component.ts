@@ -26,11 +26,11 @@ import { Component, input, output, TemplateRef } from '@angular/core';
   imports: [NgTemplateOutlet],
 })
 export class CardComponent<T> {
-  readonly list = input<T[] | null>(null);
-  readonly itemTemplate = input<TemplateRef<any> | null>(null);
-  onAddNewItem = output();
+  readonly list = input.required<T[]>();
+  readonly itemTemplate = input.required<TemplateRef<unknown>>();
+  uponAddNewItem = output();
 
   addNewItem() {
-    this.onAddNewItem.emit();
+    this.uponAddNewItem.emit();
   }
 }

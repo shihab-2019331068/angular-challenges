@@ -10,7 +10,6 @@ import {
   FakeHttpService,
   randomCity,
 } from '../../data-access/fake-http.service';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
 
@@ -20,16 +19,15 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
     <app-card
       [list]="cities()"
       [itemTemplate]="itemTemplate"
-      (onAddNewItem)="addNewCity()">
-      <img ngSrc="assets/img/city.png" width="200" height="200" />
+      (uponAddNewItem)="addItem()">
+      <img ngSrc="assets/img/city.png" height="200" width="200" />
     </app-card>
 
     <ng-template #itemTemplate let-item>
       <app-list-item
-        [name]="item.name"
         [id]="item.id"
-        [type]="cardType"
-        (onDeleteItem)="deleteCity(item.id)"></app-list-item>
+        [name]="item.name"
+        (uponDeleteItem)="deleteItem(item.id)"></app-list-item>
     </ng-template>
   `,
   imports: [CardComponent, NgOptimizedImage, ListItemComponent],
@@ -40,17 +38,16 @@ export class CityCardComponent implements OnInit {
   private store = inject(CityStore);
 
   cities = this.store.cities;
-  cardType = CardType.CITY;
 
   ngOnInit(): void {
-    this.http.fetchCities$.subscribe((c) => this.store.addAll(c));
+    this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
   }
 
-  addNewCity() {
+  addItem() {
     this.store.addOne(randomCity());
   }
 
-  deleteCity(id: number) {
+  deleteItem(id: number) {
     this.store.deleteOne(id);
   }
 }
